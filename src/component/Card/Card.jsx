@@ -11,10 +11,13 @@ function Card({ card, deleteCard, updateCard }) {
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
-
   const handleBlur = () => {
     setIsEditing(false);
     updateCard(card.id, { text });
+  };
+  const handleColorChange = (color) => {
+    updateCard(card.id, { backgroundColor: color });
+    setIsColorBarOpen(false);
   };
 
   return (
@@ -38,7 +41,7 @@ function Card({ card, deleteCard, updateCard }) {
       {!isColorBarOpen ? (
         <div className={styles.circle} onClick={() => setIsColorBarOpen(!isColorBarOpen)}></div>
       ) : (
-        <ColorBar cardid={card.id} setIsColorBarOpen={setIsColorBarOpen} updateCard={updateCard} />
+        <ColorBar handleColorChange={handleColorChange} />
       )}
       <button onClick={() => deleteCard(card.id)} className={styles.trashIcon}>
         🗑️

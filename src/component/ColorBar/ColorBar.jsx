@@ -3,12 +3,9 @@ import styles from './ColorBar.module.css'
 import Colors from '../../lib/Colors'
 
 
-function ColorBar({cardid, updateCard,setIsColorBarOpen}) {
+function ColorBar({ handleColorChange}) {
 
-    const handleColorChange = async (color) => {
-        await updateCard(cardid, { backgroundColor: color });
-        setIsColorBarOpen(false);
-    };
+    
     return (
         <div className={styles.container}>
 
