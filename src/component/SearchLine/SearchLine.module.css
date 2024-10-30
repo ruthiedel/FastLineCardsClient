@@ -1,0 +1,33 @@
+.searchcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .searchinput {
+    width: 50%;
+    max-width: 600px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    outline: none;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .searchinput:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .searchinput:focus {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: #4285f4; /* צבע כחול כמו של גוגל */
+  }

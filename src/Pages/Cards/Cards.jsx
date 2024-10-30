@@ -2,24 +2,24 @@ import React from 'react';
 import styles from './Cards.module.css';
 import { getCards as getCardsApi, updateCard as updateCardApi, deleteCard as deleteCardApi, createCard } from '../../services/cards';
 import Card from '../../component/Card/Card.jsx';
+import SearchLine from '../../component/SearchLine/SearchLine.jsx';
 
-
+let staticCards =[]
 
 function Cards() {
     const [cards, setCards] = React.useState([]);
-
     React.useEffect(() => {
         const getCards = async () => {
             try {
                 const response = await getCardsApi();
                 setCards(response.data);
+                staticCards = response.data;
             } catch (error) {
                 alert(error);
             }
         };
         getCards();
     }, []);
-
     const updateCard = async (id, updatedCard) => {
         try {
             let upcard = await updateCardApi(id, updatedCard);
@@ -30,7 +30,6 @@ function Cards() {
             alert(error);
         }
     };
-
     const deleteCard = async (id) => {
         try {
             await deleteCardApi(id);
@@ -40,7 +39,6 @@ function Cards() {
             alert(error);
         }
     };
-
     const addCard = async () => {
         let newCard = {
             text: "New Card",
@@ -53,14 +51,24 @@ function Cards() {
             alert(error);
         }
     };
+    const filter = (text) => {
+        const filteredCards = staticCards.filter(card => card.text.toLowerCase().includes(text.toLowerCase()));
+        setCards(filteredCards);
+    }
+
 
     return (
+        <>
+        <SearchLine search={filter}/>
         <div className={styles.container}>
+         
+          
             {cards.map(card => (
                 <Card key={card.id} card={card} updateCard={updateCard} deleteCard={deleteCard} />
             ))}
             <button className={styles.addButton} onClick={addCard}>+</button>
         </div>
+        </>
     );
 }
 
